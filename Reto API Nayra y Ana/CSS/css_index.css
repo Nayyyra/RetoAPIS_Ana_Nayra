@@ -1,0 +1,44 @@
+body{
+    background-color: rgb(184, 222, 255);
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#contenedor_users {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.tarjeta-usuario {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 15px;
+    width: 240px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background-color: #fff;
+}
+
+.tarjeta-usuario img {
+    border-radius: 50%;
+    width: 90px;
+    height: 90px;
+    object-fit: cover; /* Para que la imagen se adapte al tamaño del contenedor */
+}
+
+.nombre {
+    font-weight: bold;
+    font-size: 18px;
+    margin: 10px 0;
+}
+
+/* Seleccionamos todos los p del 2º al 5º (todos menos el nombre) */
+.tarjeta-usuario p:nth-of-type(n+2):nth-of-type(-n+5) {
+    font-size: 12px;
+    margin: 4px 0;
+    /*Word break para que las palabras pasen a la
+    siguiente línea y no se salgan del contenedor*/
+    word-break: break-all;
+}
