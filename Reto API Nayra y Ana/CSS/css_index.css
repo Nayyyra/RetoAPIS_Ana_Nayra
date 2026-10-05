@@ -3,9 +3,18 @@ body{
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+h1{
+    font-size: 40px;
+    text-align: center;
+    border: 5px solid rgb(10, 129, 10);
+    width: 300px;
+    margin-left: 600px;
+    font-family: 'Times New Roman', Times, serif;
+}
+
 #contenedor_users {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Los elementos saltan a la siguiente línea si no caben */
     gap: 20px;
     justify-content: center;
     padding: 20px;
@@ -41,4 +50,17 @@ body{
     /*Word break para que las palabras pasen a la
     siguiente línea y no se salgan del contenedor*/
     word-break: break-all;
+}
+
+button{
+    display: inline-block;
+    background-color:rgb(255, 255, 255);
+    padding: 15px;
+    text-align: center;
+    justify-content: center;
+    margin: 40px 150px auto 180px;
+}
+
+button:hover{
+    background-color: rgb(113, 109, 244);
 }

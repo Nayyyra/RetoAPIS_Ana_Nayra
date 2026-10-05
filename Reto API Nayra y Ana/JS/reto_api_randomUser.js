@@ -1,10 +1,11 @@
 // Conectar js con el div del html para mostrar la información
 var contenedor = document.getElementById("contenedor_users");
 
-fetch("https://randomuser.me/api/?results=10  ") // Con results=x mostramos el nº de resultados que queremos
-  .then(function(respuesta) {
-    return respuesta.json();
-  })
+function obtenerUsuarios(numero) {
+  fetch("https://randomuser.me/api/?results=" + numero) // Con results=x mostramos el nº de resultados que queremos
+    .then(function(respuesta) {
+      return respuesta.json();
+    })
    .then(function(datos) {
     // Limpiamos el contenedor por si tiene texto previo
     contenedor.innerHTML = "";
@@ -37,15 +38,22 @@ fetch("https://randomuser.me/api/?results=10  ") // Con results=x mostramos el n
   .catch(function(error) {
     console.log("Error:", error);
   });
+}
 
-  // Sacar género, nombre, email y teléfono
+// Botón para obtener 10 usuarios
+document.getElementById("diez").addEventListener("click", function() {
+  obtenerUsuarios(10);
+});
 
-  // Mostramos los datos por consola
-  /*
-      console.log("Género: " + genero);
-      console.log("Nombre Completo: " + nombreCompleto);
-      console.log("País: " + pais);
-      console.log("Email: " + email);
-      console.log("Teléfono: " + telefono);
-      console.log("Foto URL: " + foto);
-      console.log("---------------------------------------");*/
+// Botón para obtener 30 usuarios
+document.getElementById("treinta").addEventListener("click", function() {
+  obtenerUsuarios(30);
+});
+
+// Botón para obtener 50 usuarios
+document.getElementById("cincuenta").addEventListener("click", function() {
+  obtenerUsuarios(50);
+});
+
+// Al recargar la página o al abrirla y no haber pulsado ningún botón, mostrar 5 usuarios
+obtenerUsuarios(5);
