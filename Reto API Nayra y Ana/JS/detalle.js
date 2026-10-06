@@ -20,7 +20,7 @@ if (!datosGuardados) {
 
 
 var estructuraTarjeta = `
-          <div class="tarjeta-usuario">
+          <div class="tarjeta-detalle">
               <img src="${foto}" alt="Foto de ${nombreCompleto}">
               <p class="nombre">${nombreCompleto}</p>
               <p><strong>Género:</strong> ${genero}</p>
