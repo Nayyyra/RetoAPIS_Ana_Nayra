@@ -1,47 +1,66 @@
-// Conectar js con el div del html para mostrar la información
-var contenedor = document.getElementById("contenedor_users");
-// Creamos una caja vacía para guardar los usuarios y que no se pierdan
-var usuariosActuales = [];
+// Conectar JS con el contenedor principal
+const contenedor = document.getElementById("contenedor_users");
+let usuariosActuales = [];
 
 function obtenerUsuarios(numero) {
-  fetch("https://randomuser.me/api/?results=" + numero) // Con results=x mostramos el nº de resultados que queremos
+  fetch("https://randomuser.me/api/?results=" + numero)
     .then(function(respuesta) {
       return respuesta.json();
     })
-   .then(function(datos) {
-    // Limpiamos el contenedor por si tiene texto previo
-    contenedor.innerHTML = "";
-    // Metemos los usuarios que recibimos de internet en nuestra cajita
-    usuariosActuales = datos.results;
+    .then(function(datos) {
+      // 1. Vaciamos el contenedor antes de añadir los nuevos
+      contenedor.innerHTML = "";
+      usuariosActuales = datos.results;
 
-    // Accedemos al array results y lo recorremos
-    datos.results.forEach(function(usuario, indice) {
-      // Extraemos los datos exactos que queremos y los guardamos en variables
-      var genero = usuario.gender;
-      var nombreCompleto = usuario.name.first + " " + usuario.name.last;
-      var pais = usuario.location.country;
-      var email = usuario.email;
-      var telefono = usuario.phone; // Usar usuario.cell si queremos sacar el móvil
-      var foto = usuario.picture.large; // URL foto
+      // 2. Usamos un fragmento para no saturar el navegador
+      const fragmento = document.createDocumentFragment();
 
-    // Creamos la estructura con la que mostraremos la info en el html
-      var estructuraTarjeta = `
-          <div class="tarjeta-usuario" data-indice="${indice}">
-              <img src="${foto}" alt="Foto de ${nombreCompleto}">
-              <p class="nombre">${nombreCompleto}</p>
-              <p><strong>Género:</strong> ${genero}</p>
-              <p><strong>País:</strong> ${pais}</p>
-              <p><strong>Email:</strong> ${email}</p>
-              <p><strong>Teléfono:</strong> ${telefono}</p>
-          </div>
-        `;
-    // Inyectamos la tarjeta con los datos dentro del html
-      contenedor.innerHTML += estructuraTarjeta;
+      // 3. Recorremos los datos creando elementos reales del DOM
+      datos.results.forEach(function(usuario, indice) {
+        // Creamos la tarjeta contenedora
+        const tarjeta = document.createElement("div");
+        tarjeta.classList.add("tarjeta-usuario");
+        tarjeta.dataset.indice = indice;
+
+        // Imagen
+        const imagen = document.createElement("img");
+        imagen.src = usuario.picture.large;
+        imagen.alt = `Foto de ${usuario.name.first} ${usuario.name.last}`;
+
+        // Nombre
+        const nombre = document.createElement("p");
+        nombre.classList.add("nombre");
+        nombre.textContent = `${usuario.name.first} ${usuario.name.last}`;
+
+        // Género
+        const genero = document.createElement("p");
+        genero.innerHTML = `<strong>Género:</strong> ${usuario.gender}`;
+
+        // País
+        const pais = document.createElement("p");
+        pais.innerHTML = `<strong>País:</strong> ${usuario.location.country}`;
+
+        // Email
+        const email = document.createElement("p");
+        email.innerHTML = `<strong>Email:</strong> ${usuario.email}`;
+
+        // Teléfono
+        const telefono = document.createElement("p");
+        telefono.innerHTML = `<strong>Teléfono:</strong> ${usuario.phone}`;
+
+        // Añadimos todos los elementos dentro de la tarjeta
+        tarjeta.append(imagen, nombre, genero, pais, email, telefono);
+
+        // Añadimos la tarjeta al fragmento
+        fragmento.appendChild(tarjeta);
+      });
+
+      // 4. Inyectamos todo de un solo golpe al DOM
+      contenedor.appendChild(fragmento);
+    })
+    .catch(function(error) {
+      console.log("Error:", error);
     });
-  })
-  .catch(function(error) {
-    console.log("Error:", error);
-  });
 }
 
 // Botón para obtener 10 usuarios

@@ -1,4 +1,7 @@
 body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: rgb(184, 222, 255);
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -7,8 +10,8 @@ h1{
     font-size: 40px;
     text-align: center;
     border: 5px solid rgb(10, 103, 129);
-    width: 300px;
-    margin-left: 600px;
+    width: 320px;
+    margin-left: 30px auto;
     font-family: 'Times New Roman', Times, serif;
 }
 
@@ -53,13 +56,20 @@ h1{
     word-break: break-all;
 }
 
+.contenedor-botones {
+    display: flex;
+    justify-content: center;
+    gap: 20px;              
+    margin: 25px 0;
+    flex-wrap: wrap;      
+}
+
 button{
-    display: inline-block;
     background-color:rgb(255, 255, 255);
-    padding: 15px;
+    padding: 15px 24px;
     text-align: center;
     justify-content: center;
-    margin: 40px 150px auto 180px;
+    margin: 20px;
     border-radius: 7px;
 }
 
