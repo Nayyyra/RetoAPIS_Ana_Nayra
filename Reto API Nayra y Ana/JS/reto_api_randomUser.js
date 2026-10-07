@@ -79,5 +79,5 @@ contenedor.addEventListener("click", function(evento) {
   localStorage.setItem("usuarioSeleccionado", JSON.stringify(usuarioSeleccionado));
 
   // Navegamos a la nueva página
-  window.location.href = "detalle.html";
+  window.location.href = "PAGES/detalle.html";
 });
